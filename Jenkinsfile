@@ -17,11 +17,14 @@ pipeline{
     }
     post{
         success{
-            emailext body: 'Build succed', subject: 'Build succeed $PROJECT_NAME - $BUILD_NUMBER' 
+            emailext body: 'Build succed', 
+                subject: 'Build succeed $PROJECT_NAME - $BUILD_NUMBER',
+                to: 'karolkawalec99@gmail.com'
         }
         failure{
             emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n ${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-                subject: 'Build succeed $PROJECT_NAME - $BUILD_NUMBER'    
+                subject: 'Build succeed $PROJECT_NAME - $BUILD_NUMBER',
+                to: 'karolkawalec99@gmail.com'
         }
     }
 }
