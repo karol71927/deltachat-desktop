@@ -16,6 +16,9 @@ pipeline{
         }
     }
     post{
+        always{
+            emailext body: 'A Test EMail', subject: 'Test', to: 'karolkawalec99@gmail.com'
+        }
         success{
             emailext attachLog: true,
                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
