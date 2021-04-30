@@ -22,9 +22,6 @@ pipeline{
                 recipientProviders: [developers(), requestor()],
                 subject: "Success Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
                 to: 'karolkawalec99@gmail.com'
-            mail body: 'Build succed', 
-                subject: 'Status of pipeline: ${currentBuild.fullDisplayName} - #${currentBuild.result}',
-                to: 'karolkawalec99@gmail.com'
         }
         failure{
             emailext attachLog: true, body: '', subject: '', to: 'karolkawalec99@gmail.com'
