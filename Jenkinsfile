@@ -17,7 +17,11 @@ pipeline{
     }
     post{
         success{
-            emailext attachLog: true, body: '', subject: '', to: 'karolkawalec99@gmail.com'
+            emailext attachLog: true,
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                recipientProviders: [developers(), requestor()],
+                subject: "Success Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
+                to: 'karolkawalec99@gmail.com'
             mail body: 'Build succed', 
                 subject: 'Status of pipeline: ${currentBuild.fullDisplayName} - #${currentBuild.result}',
                 to: 'karolkawalec99@gmail.com'
