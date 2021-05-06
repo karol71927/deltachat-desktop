@@ -13,12 +13,31 @@ pipeline{
                         subject: "Success Jenkins build stage: Job ${env.JOB_NAME}",
                         to: 'karolkawalec99@gmail.com'
                 }
+                failure{
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - build stage failed",
+                        subject: "Failed Jenkins build stage: Job ${env.JOB_NAME}",
+                        to: 'karolkawalec99@gmail.com' 
+                    sh 'false'
+                }
             }
         }
         stage('Test'){
             steps{
                 echo 'Testing'
                 sh 'npm run test'
+            }
+            post{
+                success{
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - build stage passed",
+                        subject: "Success Jenkins build stage: Job ${env.JOB_NAME}",
+                        to: 'karolkawalec99@gmail.com'
+                }
+                failure{
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - build stage failed",
+                        subject: "Failed Jenkins build stage: Job ${env.JOB_NAME}",
+                        to: 'karolkawalec99@gmail.com' 
+                    sh 'false'
+                }
             }
         }
     }
