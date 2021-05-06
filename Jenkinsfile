@@ -9,7 +9,6 @@ pipeline{
             }
             post{
                 success{
-                    sh 'false'
                     emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - build stage passed",
                         subject: "Success Jenkins build stage: Job ${env.JOB_NAME}",
                         to: 'karolkawalec99@gmail.com'
