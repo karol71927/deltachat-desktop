@@ -6,6 +6,7 @@ pipeline{
                 echo 'Building' 
                 sh 'npm install'
                 sh 'npm run build'
+                
             }
             post{
                 success{
