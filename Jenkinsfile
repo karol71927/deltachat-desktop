@@ -29,13 +29,13 @@ pipeline{
             }
             post{
                 success{
-                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - build stage passed",
-                        subject: "Success Jenkins build stage: Job ${env.JOB_NAME}",
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - test stage passed",
+                        subject: "Success Jenkins test stage: Job ${env.JOB_NAME}",
                         to: 'karolkawalec99@gmail.com'
                 }
                 failure{
-                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - build stage failed",
-                        subject: "Failed Jenkins build stage: Job ${env.JOB_NAME}",
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - test stage failed",
+                        subject: "Failed Jenkins test stage: Job ${env.JOB_NAME}",
                         to: 'karolkawalec99@gmail.com' 
                     sh 'false'
                 }
