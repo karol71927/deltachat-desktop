@@ -41,6 +41,25 @@ pipeline{
                 }
             }
         }
+        stage('Deploy'){
+            steps{
+                echo 'Deploying'
+                sh ' docker build -t deltachat -f docker/Dockerfile.deploy . '
+            }
+            post{
+                success{
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - deploy stage passed",
+                        subject: "Success Jenkins deploy stage: Job ${env.JOB_NAME}",
+                        to: 'karolkawalec99@gmail.com'
+                }
+                failure{
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} - deploy stage failed",
+                        subject: "Failed Jenkins deploy stage: Job ${env.JOB_NAME}",
+                        to: 'karolkawalec99@gmail.com' 
+                    sh 'false'
+                }
+            }
+        }
     }
     post{
         success{
